@@ -1,0 +1,3 @@
+/home/zhivko/workspace/Starcraft/build/CMakeFiles/rebuild_cache.dir
+/home/zhivko/workspace/Starcraft/build/CMakeFiles/starcraft.dir
+/home/zhivko/workspace/Starcraft/build/CMakeFiles/edit_cache.dir
