@@ -11,7 +11,21 @@ int convert_bitStream(int *bitstream, int sizeBitstream, uint8_t *tokens);
 int bitsToBytes(uint8_t *tokens, int tokensCount, uint8_t *outBytes);
 void convertBarcode(uint8_t *inBytes, int inBytesCount, char *code);
 void validateAndPrintResult(char *code);
+void processTestData(void);
 int main(void)
+{
+    int count;
+
+    scanf("%d", &count);
+
+    for (int i = 0; i < count; i++)
+    {
+        printf("Test №.%d\n", i + 1);
+        processTestData();
+    }
+}
+
+void processTestData(void)
 {
     int size;
     float signal;
@@ -100,8 +114,6 @@ static const char convertionTable[32] = {
     ' ', // 1E
     ' ', // 1F
 };
-// 123-4552
-// 00110 10001 01001 11001 00100 00101 10100 10100 01001 00110
 
 static int getWeight(char element)
 {
@@ -210,8 +222,6 @@ int bitsToBytes(uint8_t *tokens, int tokensCount, uint8_t *outBytes)
     int index = 0;
     uint8_t symbol;
 
-    // Adjust tokens count
-    // ???? tokensCount += tokensCount % 5;
     if (tokensCount < SYM_WIDTH_IN_BITS)
     {
         return (0);
@@ -220,11 +230,9 @@ int bitsToBytes(uint8_t *tokens, int tokensCount, uint8_t *outBytes)
     if (symbol != BC_START_STOP)
     {
         index = tokensCount - SYM_WIDTH_IN_BITS;
-        // Maybe reversed reader
         symbol = collectReverseSymbol(&tokens[index]);
         if (symbol != BC_START_STOP)
         {
-            // No valid start/stop found
             return (0);
         }
         do
@@ -237,7 +245,6 @@ int bitsToBytes(uint8_t *tokens, int tokensCount, uint8_t *outBytes)
     }
     else
     {
-        // Found start/stop char, proceed with next bytes
         do
         {
             *p++ = symbol;
