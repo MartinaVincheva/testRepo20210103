@@ -39,24 +39,25 @@ void validateAndPrintResult(char *code)
     int codeLength = strlen(code);
     int c = calcC(code, codeLength - 2);
     int k = calcK(code, codeLength - 2);
-    printf("c=%d\n", c);
-    printf("k=%d\n", k);
-    printf("myCode = %s,%c,%c\n", code, code[codeLength - 2], code[codeLength - 1]);
+
     if (codeLength < 2)
     {
-        printf("Oooops 1 \n");
+        printf("\nBarcode truncated. Move the scanner to the left. \n");
         exit(-1);
     }
     if (c != code[codeLength - 2] - '0')
     {
-        printf("Oooops c \n");
+        printf("Wrong C validation! \n");
         exit(-1);
     }
     if (k != code[codeLength - 1] - '0')
     {
-        printf("Oooops k \n");
+        printf("Wrong K validation! \n");
         exit(-2);
     }
+    printf("c=%d\n", c);
+    printf("k=%d\n", k);
+    printf("myCode = %s\n", code);
     printf("OK\n");
 }
 
